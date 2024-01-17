@@ -9,21 +9,28 @@
 /* Begin PBXBuildFile section */
 		C79D13ED2B57B70200C023BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79D13EC2B57B70200C023BB /* AppDelegate.swift */; };
 		C79D13EF2B57B70200C023BB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79D13EE2B57B70200C023BB /* SceneDelegate.swift */; };
-		C79D13F12B57B70200C023BB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79D13F02B57B70200C023BB /* ViewController.swift */; };
+		C79D13F12B57B70200C023BB /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79D13F02B57B70200C023BB /* LoginController.swift */; };
 		C79D13F42B57B70200C023BB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C79D13F22B57B70200C023BB /* Main.storyboard */; };
 		C79D13F62B57B70400C023BB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C79D13F52B57B70400C023BB /* Assets.xcassets */; };
 		C79D13F92B57B70400C023BB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C79D13F72B57B70400C023BB /* LaunchScreen.storyboard */; };
+		C79D14022B57C38600C023BB /* TinyConstraints in Frameworks */ = {isa = PBXBuildFile; productRef = C79D14012B57C38600C023BB /* TinyConstraints */; };
+		C7DE98572B58794600727D48 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DE98562B58794600727D48 /* LoginViewModel.swift */; };
+		C7DE985C2B587A7200727D48 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DE985B2B587A7200727D48 /* StringExtension.swift */; };
+		C7DE985E2B587F4000727D48 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = C7DE985D2B587F4000727D48 /* Localizable.xcstrings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		C79D13E92B57B70200C023BB /* FinalApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FinalApplication.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C79D13EC2B57B70200C023BB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C79D13EE2B57B70200C023BB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		C79D13F02B57B70200C023BB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		C79D13F02B57B70200C023BB /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		C79D13F32B57B70200C023BB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C79D13F52B57B70400C023BB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C79D13F82B57B70400C023BB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C79D13FA2B57B70400C023BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C7DE98562B58794600727D48 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		C7DE985B2B587A7200727D48 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		C7DE985D2B587F4000727D48 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +38,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C79D14022B57C38600C023BB /* TinyConstraints in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,15 +64,90 @@
 		C79D13EB2B57B70200C023BB /* FinalApplication */ = {
 			isa = PBXGroup;
 			children = (
-				C79D13EC2B57B70200C023BB /* AppDelegate.swift */,
-				C79D13EE2B57B70200C023BB /* SceneDelegate.swift */,
-				C79D13F02B57B70200C023BB /* ViewController.swift */,
-				C79D13F22B57B70200C023BB /* Main.storyboard */,
-				C79D13F52B57B70400C023BB /* Assets.xcassets */,
+				C7DE98502B585F6800727D48 /* App */,
+				C7DE985A2B587A4100727D48 /* Localizable */,
+				C7DE98592B5879F900727D48 /* Resources */,
+				C7DE98582B5879B600727D48 /* Storyboards */,
+				C7DE98512B5878D400727D48 /* Scenes */,
 				C79D13F72B57B70400C023BB /* LaunchScreen.storyboard */,
 				C79D13FA2B57B70400C023BB /* Info.plist */,
 			);
 			path = FinalApplication;
+			sourceTree = "<group>";
+		};
+		C7DE98502B585F6800727D48 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				C79D13EC2B57B70200C023BB /* AppDelegate.swift */,
+				C79D13EE2B57B70200C023BB /* SceneDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		C7DE98512B5878D400727D48 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				C7DE98522B5878DB00727D48 /* LoginScene */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		C7DE98522B5878DB00727D48 /* LoginScene */ = {
+			isa = PBXGroup;
+			children = (
+				C7DE98542B58790600727D48 /* Models */,
+				C7DE98552B58790C00727D48 /* Views */,
+				C7DE98532B5878FD00727D48 /* ViewModels */,
+			);
+			path = LoginScene;
+			sourceTree = "<group>";
+		};
+		C7DE98532B5878FD00727D48 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				C7DE98562B58794600727D48 /* LoginViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		C7DE98542B58790600727D48 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		C7DE98552B58790C00727D48 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C79D13F02B57B70200C023BB /* LoginController.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		C7DE98582B5879B600727D48 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				C79D13F22B57B70200C023BB /* Main.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		C7DE98592B5879F900727D48 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				C79D13F52B57B70400C023BB /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		C7DE985A2B587A4100727D48 /* Localizable */ = {
+			isa = PBXGroup;
+			children = (
+				C7DE985B2B587A7200727D48 /* StringExtension.swift */,
+				C7DE985D2B587F4000727D48 /* Localizable.xcstrings */,
+			);
+			path = Localizable;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -83,6 +166,9 @@
 			dependencies = (
 			);
 			name = FinalApplication;
+			packageProductDependencies = (
+				C79D14012B57C38600C023BB /* TinyConstraints */,
+			);
 			productName = FinalApplication;
 			productReference = C79D13E92B57B70200C023BB /* FinalApplication.app */;
 			productType = "com.apple.product-type.application";
@@ -109,8 +195,12 @@
 			knownRegions = (
 				en,
 				Base,
+				"ka-GE",
 			);
 			mainGroup = C79D13E02B57B70200C023BB;
+			packageReferences = (
+				C79D14002B57C38600C023BB /* XCRemoteSwiftPackageReference "TinyConstraints" */,
+			);
 			productRefGroup = C79D13EA2B57B70200C023BB /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -127,6 +217,7 @@
 			files = (
 				C79D13F92B57B70400C023BB /* LaunchScreen.storyboard in Resources */,
 				C79D13F62B57B70400C023BB /* Assets.xcassets in Resources */,
+				C7DE985E2B587F4000727D48 /* Localizable.xcstrings in Resources */,
 				C79D13F42B57B70200C023BB /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -138,7 +229,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C79D13F12B57B70200C023BB /* ViewController.swift in Sources */,
+				C7DE98572B58794600727D48 /* LoginViewModel.swift in Sources */,
+				C79D13F12B57B70200C023BB /* LoginController.swift in Sources */,
+				C7DE985C2B587A7200727D48 /* StringExtension.swift in Sources */,
 				C79D13ED2B57B70200C023BB /* AppDelegate.swift in Sources */,
 				C79D13EF2B57B70200C023BB /* SceneDelegate.swift in Sources */,
 			);
@@ -361,6 +454,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C79D14002B57C38600C023BB /* XCRemoteSwiftPackageReference "TinyConstraints" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/roberthein/TinyConstraints";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C79D14012B57C38600C023BB /* TinyConstraints */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C79D14002B57C38600C023BB /* XCRemoteSwiftPackageReference "TinyConstraints" */;
+			productName = TinyConstraints;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C79D13E12B57B70200C023BB /* Project object */;
 }
