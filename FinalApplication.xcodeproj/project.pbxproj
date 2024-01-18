@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C79541EA2B59924400D8215C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79541E92B59924400D8215C /* User.swift */; };
+		C79541ED2B59941F00D8215C /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79541EC2B59941F00D8215C /* UIView+Extension.swift */; };
+		C79541EF2B59946D00D8215C /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79541EE2B59946D00D8215C /* String+Extension.swift */; };
+		C79541F22B599A6F00D8215C /* LoginStateEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79541F12B599A6F00D8215C /* LoginStateEnum.swift */; };
+		C79541F42B599F3600D8215C /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79541F32B599F3600D8215C /* UIViewController+Extension.swift */; };
+		C79541F72B59AF0E00D8215C /* error.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C79541F62B59AF0E00D8215C /* error.mp3 */; };
+		C79541FC2B59B8CE00D8215C /* AudioPlayerUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79541FB2B59B8CE00D8215C /* AudioPlayerUtility.swift */; };
 		C79D13ED2B57B70200C023BB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79D13EC2B57B70200C023BB /* AppDelegate.swift */; };
 		C79D13EF2B57B70200C023BB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79D13EE2B57B70200C023BB /* SceneDelegate.swift */; };
 		C79D13F12B57B70200C023BB /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79D13F02B57B70200C023BB /* LoginController.swift */; };
@@ -20,6 +27,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C79541E92B59924400D8215C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		C79541EC2B59941F00D8215C /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		C79541EE2B59946D00D8215C /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		C79541F12B599A6F00D8215C /* LoginStateEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginStateEnum.swift; sourceTree = "<group>"; };
+		C79541F32B599F3600D8215C /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
+		C79541F62B59AF0E00D8215C /* error.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = error.mp3; sourceTree = "<group>"; };
+		C79541FB2B59B8CE00D8215C /* AudioPlayerUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerUtility.swift; sourceTree = "<group>"; };
 		C79D13E92B57B70200C023BB /* FinalApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FinalApplication.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C79D13EC2B57B70200C023BB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C79D13EE2B57B70200C023BB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -45,6 +59,40 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C79541EB2B5993F600D8215C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				C79541EC2B59941F00D8215C /* UIView+Extension.swift */,
+				C79541EE2B59946D00D8215C /* String+Extension.swift */,
+				C79541F32B599F3600D8215C /* UIViewController+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		C79541F02B599A5800D8215C /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				C79541F12B599A6F00D8215C /* LoginStateEnum.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
+		C79541F52B59AEF000D8215C /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				C79541F62B59AF0E00D8215C /* error.mp3 */,
+			);
+			path = Audio;
+			sourceTree = "<group>";
+		};
+		C79541FA2B59B8B500D8215C /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				C79541FB2B59B8CE00D8215C /* AudioPlayerUtility.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		C79D13E02B57B70200C023BB = {
 			isa = PBXGroup;
 			children = (
@@ -65,10 +113,14 @@
 			isa = PBXGroup;
 			children = (
 				C7DE98502B585F6800727D48 /* App */,
+				C79541FA2B59B8B500D8215C /* Helpers */,
+				C79541F52B59AEF000D8215C /* Audio */,
 				C7DE985A2B587A4100727D48 /* Localizable */,
 				C7DE98592B5879F900727D48 /* Resources */,
 				C7DE98582B5879B600727D48 /* Storyboards */,
+				C79541EB2B5993F600D8215C /* Extensions */,
 				C7DE98512B5878D400727D48 /* Scenes */,
+				C7DE98542B58790600727D48 /* Models */,
 				C79D13F72B57B70400C023BB /* LaunchScreen.storyboard */,
 				C79D13FA2B57B70400C023BB /* Info.plist */,
 			);
@@ -95,7 +147,7 @@
 		C7DE98522B5878DB00727D48 /* LoginScene */ = {
 			isa = PBXGroup;
 			children = (
-				C7DE98542B58790600727D48 /* Models */,
+				C79541F02B599A5800D8215C /* Enums */,
 				C7DE98552B58790C00727D48 /* Views */,
 				C7DE98532B5878FD00727D48 /* ViewModels */,
 			);
@@ -113,6 +165,7 @@
 		C7DE98542B58790600727D48 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				C79541E92B59924400D8215C /* User.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -216,6 +269,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C79D13F92B57B70400C023BB /* LaunchScreen.storyboard in Resources */,
+				C79541F72B59AF0E00D8215C /* error.mp3 in Resources */,
 				C79D13F62B57B70400C023BB /* Assets.xcassets in Resources */,
 				C7DE985E2B587F4000727D48 /* Localizable.xcstrings in Resources */,
 				C79D13F42B57B70200C023BB /* Main.storyboard in Resources */,
@@ -229,10 +283,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C79541FC2B59B8CE00D8215C /* AudioPlayerUtility.swift in Sources */,
+				C79541EF2B59946D00D8215C /* String+Extension.swift in Sources */,
+				C79541ED2B59941F00D8215C /* UIView+Extension.swift in Sources */,
 				C7DE98572B58794600727D48 /* LoginViewModel.swift in Sources */,
 				C79D13F12B57B70200C023BB /* LoginController.swift in Sources */,
+				C79541EA2B59924400D8215C /* User.swift in Sources */,
 				C7DE985C2B587A7200727D48 /* StringExtension.swift in Sources */,
 				C79D13ED2B57B70200C023BB /* AppDelegate.swift in Sources */,
+				C79541F22B599A6F00D8215C /* LoginStateEnum.swift in Sources */,
+				C79541F42B599F3600D8215C /* UIViewController+Extension.swift in Sources */,
 				C79D13EF2B57B70200C023BB /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

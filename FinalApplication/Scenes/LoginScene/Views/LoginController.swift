@@ -7,6 +7,7 @@
 
 import UIKit
 import TinyConstraints
+import AVFAudio
 
 class LoginController: UIViewController {
     
@@ -65,6 +66,14 @@ class LoginController: UIViewController {
         return button
     }()
     
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .large)
+        indicator.hidesWhenStopped = true
+        return indicator
+    }()
+    
+    var viewModel: UserViewModelProtocol = UserViewModel()
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,6 +90,7 @@ class LoginController: UIViewController {
         view.addSubview(emailTextField)
         view.addSubview(passwordTextField)
         view.addSubview(loginButton)
+        view.addSubview(activityIndicator)
         
         welcomeLabel.topToSuperview(offset: 50, usingSafeArea: true)
         welcomeLabel.centerXToSuperview()
@@ -104,11 +114,33 @@ class LoginController: UIViewController {
         loginButton.leftToSuperview(offset: 16)
         loginButton.rightToSuperview(offset: -16)
         loginButton.height(57)
+        
+        activityIndicator.topToBottom(of: loginButton, offset: 20)
+        activityIndicator.centerXToSuperview()
     }
     
     // MARK: - Actions
     @objc private func loginButtonTapped() {
         
+        let email = emailTextField.text ?? ""
+        let password = passwordTextField.text ?? ""
+        let loginState = viewModel.loginUser(email: email, password: password)
+        
+        switch loginState {
+        case .success:
+            activityIndicator.startAnimating()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                self.activityIndicator.stopAnimating()
+                
+                // self.navigationController?.pushViewController(NextViewController(), animated: true)
+                
+            }
+        case .failure(let errorMessage):
+            AudioPlayerUtility.playAudio(forResource: "error", withExtension: "mp3")
+            self.showToast(errorMessage)
+            emailTextField.shake()
+            passwordTextField.shake()
+        }
     }
     
 }
