@@ -8,25 +8,39 @@
 import Foundation
 
 protocol UserViewModelProtocol {
-    func loginUser(email: String, password: String) -> LoginState
+    func loginUser(email: String, password: String) -> (LoginState, User?)
+    func saveUserToUserDefaults(_ user: User)
 }
 
 class UserViewModel: UserViewModelProtocol {
-
-    func loginUser(email: String, password: String) -> LoginState {
+    
+    // MARK: - Login
+    func loginUser(email: String, password: String) -> (LoginState, User?) {
         guard !email.isEmpty, !password.isEmpty else {
-            return .failure("all_fields_are_requered".localized)
+            return (.failure("all_fields_are_requered".localized), nil)
         }
-
+        
         if !email.isValidEmail() {
-            return .failure("email_format_is_incorrect".localized)
+            return (.failure("email_format_is_incorrect".localized), nil)
         }
-
+        
         if password.count < 8 {
-            return .failure("password_must_contain_minimum_8_symbol".localized)
+            return (.failure("password_must_contain_minimum_8_symbol".localized), nil)
         }
-
-        let userExists = fakeUserList.contains { $0.email == email && $0.password == password }
-        return userExists ? .success : .failure("email_or_password_is_incorrect".localized)
+        
+        if let user = fakeUserList.first(where: { $0.email == email && $0.password == password }) {
+            return (.success, user)
+        } else {
+            return (.failure("email_or_password_is_incorrect".localized), nil)
+        }
+    }
+    
+    // MARK: - Save User & logged status
+    func saveUserToUserDefaults(_ user: User) {
+        if let userData = try? JSONEncoder().encode(user) {
+            UserDefaults.standard.set(userData, forKey: "currentUser")
+            UserDefaults.standard.set(true, forKey: "isUserLoggedIn")
+            UserDefaults.standard.synchronize()
+        }
     }
 }

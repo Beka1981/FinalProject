@@ -8,6 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		C7814EDE2B5AB75000FDC0C7 /* ShoppingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7814EDD2B5AB75000FDC0C7 /* ShoppingViewModel.swift */; };
+		C7814EE12B5AE61C00FDC0C7 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = C7814EE02B5AE61C00FDC0C7 /* Alamofire */; };
+		C7814EE42B5AF2FF00FDC0C7 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = C7814EE32B5AF2FF00FDC0C7 /* SDWebImage */; };
+		C7814EE62B5AF2FF00FDC0C7 /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = C7814EE52B5AF2FF00FDC0C7 /* SDWebImageMapKit */; };
+		C7814EE92B5AF7B200FDC0C7 /* CustomRequestInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7814EE82B5AF7B200FDC0C7 /* CustomRequestInterceptor.swift */; };
+		C7814EEB2B5AF82A00FDC0C7 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7814EEA2B5AF82A00FDC0C7 /* NetworkService.swift */; };
+		C7814EEE2B5B054A00FDC0C7 /* ProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7814EED2B5B054A00FDC0C7 /* ProductModel.swift */; };
+		C7814EF12B5B12A900FDC0C7 /* NetworkManagerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7814EF02B5B12A900FDC0C7 /* NetworkManagerError.swift */; };
 		C79541EA2B59924400D8215C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79541E92B59924400D8215C /* User.swift */; };
 		C79541ED2B59941F00D8215C /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79541EC2B59941F00D8215C /* UIView+Extension.swift */; };
 		C79541EF2B59946D00D8215C /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C79541EE2B59946D00D8215C /* String+Extension.swift */; };
@@ -29,6 +36,10 @@
 
 /* Begin PBXFileReference section */
 		C7814EDD2B5AB75000FDC0C7 /* ShoppingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingViewModel.swift; sourceTree = "<group>"; };
+		C7814EE82B5AF7B200FDC0C7 /* CustomRequestInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRequestInterceptor.swift; sourceTree = "<group>"; };
+		C7814EEA2B5AF82A00FDC0C7 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		C7814EED2B5B054A00FDC0C7 /* ProductModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductModel.swift; sourceTree = "<group>"; };
+		C7814EF02B5B12A900FDC0C7 /* NetworkManagerError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerError.swift; sourceTree = "<group>"; };
 		C79541E92B59924400D8215C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		C79541EC2B59941F00D8215C /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		C79541EE2B59946D00D8215C /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
@@ -54,13 +65,43 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C7814EE42B5AF2FF00FDC0C7 /* SDWebImage in Frameworks */,
 				C79D14022B57C38600C023BB /* TinyConstraints in Frameworks */,
+				C7814EE62B5AF2FF00FDC0C7 /* SDWebImageMapKit in Frameworks */,
+				C7814EE12B5AE61C00FDC0C7 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C7814EE72B5AF7A400FDC0C7 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				C7814EEF2B5B127500FDC0C7 /* Enums */,
+				C7814EEC2B5B053500FDC0C7 /* Models */,
+				C7814EE82B5AF7B200FDC0C7 /* CustomRequestInterceptor.swift */,
+				C7814EEA2B5AF82A00FDC0C7 /* NetworkService.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		C7814EEC2B5B053500FDC0C7 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C7814EED2B5B054A00FDC0C7 /* ProductModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		C7814EEF2B5B127500FDC0C7 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				C7814EF02B5B12A900FDC0C7 /* NetworkManagerError.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
 		C79541EB2B5993F600D8215C /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -114,6 +155,7 @@
 		C79D13EB2B57B70200C023BB /* FinalApplication */ = {
 			isa = PBXGroup;
 			children = (
+				C7814EE72B5AF7A400FDC0C7 /* Network */,
 				C7DE98502B585F6800727D48 /* App */,
 				C79541FA2B59B8B500D8215C /* Helpers */,
 				C79541F52B59AEF000D8215C /* Audio */,
@@ -240,6 +282,9 @@
 			name = FinalApplication;
 			packageProductDependencies = (
 				C79D14012B57C38600C023BB /* TinyConstraints */,
+				C7814EE02B5AE61C00FDC0C7 /* Alamofire */,
+				C7814EE32B5AF2FF00FDC0C7 /* SDWebImage */,
+				C7814EE52B5AF2FF00FDC0C7 /* SDWebImageMapKit */,
 			);
 			productName = FinalApplication;
 			productReference = C79D13E92B57B70200C023BB /* FinalApplication.app */;
@@ -272,6 +317,8 @@
 			mainGroup = C79D13E02B57B70200C023BB;
 			packageReferences = (
 				C79D14002B57C38600C023BB /* XCRemoteSwiftPackageReference "TinyConstraints" */,
+				C7814EDF2B5AE61C00FDC0C7 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				C7814EE22B5AF2FF00FDC0C7 /* XCRemoteSwiftPackageReference "SDWebImage" */,
 			);
 			productRefGroup = C79D13EA2B57B70200C023BB /* Products */;
 			projectDirPath = "";
@@ -308,12 +355,16 @@
 				C79D13F12B57B70200C023BB /* LoginController.swift in Sources */,
 				C79541EA2B59924400D8215C /* User.swift in Sources */,
 				C7DE985C2B587A7200727D48 /* StringExtension.swift in Sources */,
+				C7814EF12B5B12A900FDC0C7 /* NetworkManagerError.swift in Sources */,
 				C79D13ED2B57B70200C023BB /* AppDelegate.swift in Sources */,
 				C79541F22B599A6F00D8215C /* LoginStateEnum.swift in Sources */,
 				C7814EDE2B5AB75000FDC0C7 /* ShoppingViewModel.swift in Sources */,
+				C7814EEB2B5AF82A00FDC0C7 /* NetworkService.swift in Sources */,
+				C7814EE92B5AF7B200FDC0C7 /* CustomRequestInterceptor.swift in Sources */,
 				C79541F42B599F3600D8215C /* UIViewController+Extension.swift in Sources */,
 				C7ABFC902B5A8C88009274EB /* ShoppingViewController.swift in Sources */,
 				C79D13EF2B57B70200C023BB /* SceneDelegate.swift in Sources */,
+				C7814EEE2B5B054A00FDC0C7 /* ProductModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -528,6 +579,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		C7814EDF2B5AE61C00FDC0C7 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.8.1;
+			};
+		};
+		C7814EE22B5AF2FF00FDC0C7 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.18.10;
+			};
+		};
 		C79D14002B57C38600C023BB /* XCRemoteSwiftPackageReference "TinyConstraints" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/roberthein/TinyConstraints";
@@ -539,6 +606,21 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		C7814EE02B5AE61C00FDC0C7 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C7814EDF2B5AE61C00FDC0C7 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		C7814EE32B5AF2FF00FDC0C7 /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C7814EE22B5AF2FF00FDC0C7 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
+		C7814EE52B5AF2FF00FDC0C7 /* SDWebImageMapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C7814EE22B5AF2FF00FDC0C7 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImageMapKit;
+		};
 		C79D14012B57C38600C023BB /* TinyConstraints */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = C79D14002B57C38600C023BB /* XCRemoteSwiftPackageReference "TinyConstraints" */;

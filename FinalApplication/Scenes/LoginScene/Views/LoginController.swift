@@ -124,17 +124,20 @@ class LoginController: UIViewController {
         
         let email = emailTextField.text ?? ""
         let password = passwordTextField.text ?? ""
-        let loginState = viewModel.loginUser(email: email, password: password)
+        let (loginState, user) = viewModel.loginUser(email: email, password: password)
         
         switch loginState {
         case .success:
             activityIndicator.startAnimating()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                        self.activityIndicator.stopAnimating()
-                        
-                        let shoppingViewController = ShoppingViewController()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                
+                if let user = user { self.viewModel.saveUserToUserDefaults(user) }
+                
+                self.activityIndicator.stopAnimating()
+                
+                let shoppingViewController = ShoppingViewController()
                 self.navigationController?.pushViewController(shoppingViewController, animated: true)
-                    }
+            }
         case .failure(let errorMessage):
             AudioPlayerUtility.playAudio(forResource: "error", withExtension: "mp3")
             self.showToast(errorMessage)
