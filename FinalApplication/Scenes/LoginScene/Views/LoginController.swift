@@ -130,11 +130,11 @@ class LoginController: UIViewController {
         case .success:
             activityIndicator.startAnimating()
             DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                self.activityIndicator.stopAnimating()
-                
-                // self.navigationController?.pushViewController(NextViewController(), animated: true)
-                
-            }
+                        self.activityIndicator.stopAnimating()
+                        
+                        let shoppingViewController = ShoppingViewController()
+                self.navigationController?.pushViewController(shoppingViewController, animated: true)
+                    }
         case .failure(let errorMessage):
             AudioPlayerUtility.playAudio(forResource: "error", withExtension: "mp3")
             self.showToast(errorMessage)
