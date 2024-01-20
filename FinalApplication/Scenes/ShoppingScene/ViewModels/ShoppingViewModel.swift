@@ -18,7 +18,7 @@ protocol ProductListViewModelInputDelegate {
 }
 
 protocol ProductListViewModelOutputDelegate {
-    func productChanged()
+    func reloadData()
     func showError(text: String)
 }
 
@@ -27,21 +27,26 @@ class ShoppingViewModel: ProductListViewModelTypeDelegate {
     var input: ProductListViewModelInputDelegate { self }
     var output: ProductListViewModelOutputDelegate?
     
-    private var product: ProductResponse?
+    private var products: [Product] = []
+    
+    var categorizedProducts: [(category: String, products: [Product])] {
+        let groupedProducts = Dictionary(grouping: products, by: { $0.category })
+        return groupedProducts.map { (category: $0.key, products: $0.value) }.sorted { $0.category < $1.category }
+    }
     
     private func fetchProduct() {
         let urlString = "https://dummyjson.com/products"
         NetworkService.shared.getData(from: urlString) { [weak self] (result: Result<ProductResponse, NetworkManagerError>) in
             switch result {
             case .success(let productResponse):
-                self?.product = productResponse
-                self?.output?.productChanged()
+                self?.products = productResponse.products
+                self?.output?.reloadData()
             case .failure(let error):
                 self?.output?.showError(text: error.description)
             }
         }
     }
-   
+    
 }
 
 extension ShoppingViewModel: ProductListViewModelInputDelegate {

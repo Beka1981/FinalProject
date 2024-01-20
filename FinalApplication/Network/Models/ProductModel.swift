@@ -9,8 +9,8 @@ import Foundation
 import SwiftUI
 
 struct ProductResponse: Codable {
-    var products: [Product]?
-    var total: Int?
+    var products: [Product]
+    var total: Int
 }
 
 struct Product: Codable {
