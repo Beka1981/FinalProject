@@ -137,6 +137,91 @@
         }
       }
     },
+    "pay" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Pay"
+          }
+        },
+        "ka-GE" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "გადახდა"
+          }
+        }
+      }
+    },
+    "payment_error" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unfortunately, the payment could not be made, please try again"
+          }
+        },
+        "ka-GE" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "სამწუხაროდ გადახდა ვერ მოხერხდა, სცადეთ თავიდან"
+          }
+        }
+      }
+    },
+    "payment_page" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Payment page"
+          }
+        },
+        "ka-GE" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "გადახდის გვერდი"
+          }
+        }
+      }
+    },
+    "payment_success" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The payment was made successfully"
+          }
+        },
+        "ka-GE" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "გადახდა წარმატებით შესრულდა"
+          }
+        }
+      }
+    },
+    "return_back" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Return back"
+          }
+        },
+        "ka-GE" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "უკან დაბრუნება"
+          }
+        }
+      }
+    },
     "welcome" : {
       "extractionState" : "manual",
       "localizations" : {

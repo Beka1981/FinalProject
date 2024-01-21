@@ -39,6 +39,8 @@ class CustomTableViewCell: UITableViewCell {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 12)
         label.textColor = .black
+        label.numberOfLines = 1 
+        label.lineBreakMode = .byTruncatingTail
         return label
     }()
     
@@ -62,6 +64,7 @@ class CustomTableViewCell: UITableViewCell {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 12)
         label.textColor = .black
+        label.text = "0"
         label.textAlignment = .center
         return label
     }()
@@ -75,10 +78,21 @@ class CustomTableViewCell: UITableViewCell {
         return button
     }
     
+    var quantity: Int = 0 {
+            didSet {
+                quantityLabel.text = "\(quantity)"
+            }
+        }
+    
+    var onAddTap: (() -> Void)?
+    var onRemoveTap: (() -> Void)?
+    
     // MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         layoutCell()
+        decreaseButton.addTarget(self, action: #selector(decreaseButtonTapped), for: .touchUpInside)
+        increaseButton.addTarget(self, action: #selector(increaseButtonTapped), for: .touchUpInside)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -137,14 +151,26 @@ class CustomTableViewCell: UITableViewCell {
     
     // MARK: - Function
     func configure(with product: Product) {
-        titleLabel.text = product.title
+        titleLabel.text = product.brand
         stockLabel.text = "stock: \(product.stock)"
         priceLabel.text = "price: \(product.price)"
-        quantityLabel.text = "0"
+        
         
         if let url = URL(string: product.thumbnail) {
             productImageView.sd_setImage(with: url, completed: nil)
         }
+    }
+    
+    // MARK: - Button clicks
+    @objc func decreaseButtonTapped() {
+            onRemoveTap?()
+        
+        }
+
+    @objc func increaseButtonTapped() {
+        onAddTap?()
+        
+        
     }
     
 }

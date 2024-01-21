@@ -37,10 +37,8 @@ class UserViewModel: UserViewModelProtocol {
     
     // MARK: - Save User & logged status
     func saveUserToUserDefaults(_ user: User) {
-        if let userData = try? JSONEncoder().encode(user) {
-            UserDefaults.standard.set(userData, forKey: "currentUser")
-            UserDefaults.standard.set(true, forKey: "isUserLoggedIn")
-            UserDefaults.standard.synchronize()
-        }
+        UserDefaultsManager.shared.saveUser(user)
+        UserDefaultsManager.shared.setLoginStatus(true)
     }
+    
 }

@@ -184,16 +184,15 @@ class ShoppingViewController: UIViewController {
         actionLabel.trailingToLeading(of: arrowImageView, offset: -12   )
         actionLabel.centerYToSuperview(offset: -10)
         
-        //transparentButton.addTarget(self, action: #selector(transparentButtonTapped), for: .touchUpInside)
+        transparentButton.addTarget(self, action: #selector(transparentButtonTapped), for: .touchUpInside)
     }
     
     // MARK: - Actions
     @objc func logoutButtonTapped() {
+        print("logout!!!!!")
+        UserDefaultsManager.shared.deleteUser()
+        UserDefaultsManager.shared.setLoginStatus(false)
        
-        UserDefaults.standard.removeObject(forKey: "currentUser")
-        UserDefaults.standard.set(false, forKey: "isUserLoggedIn")
-        UserDefaults.standard.synchronize()
-        
         if let navigationController = self.navigationController {
             navigationController.popToRootViewController(animated: true)
         } else {
@@ -201,8 +200,19 @@ class ShoppingViewController: UIViewController {
             loginController.navigationItem.hidesBackButton = true
                 self.navigationController?.pushViewController(loginController, animated: true)
         }
-    
         
+    }
+    
+    @objc func transparentButtonTapped() {
+        if (!viewModel.isCartEmpty()) {
+            let vc = DetailsViewController()
+            vc.viewModel.cart = viewModel.getItemsForSecondViewModel()
+            self.navigationController?.pushViewController(vc, animated: true)
+        } else {
+            let alert = UIAlertController(title: "შეტყობინება", message: "კალათა ცარიელია.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            self.present(alert, animated: true)
+        }
     }
 }
 
@@ -248,6 +258,24 @@ extension ShoppingViewController: UITableViewDataSource {
         }
         let product = viewModel.categorizedProducts[indexPath.section].products[indexPath.row]
         cell.configure(with: product)
+        
+        let quantity = viewModel.getQuantity(for: product)
+            cell.quantity = quantity
+        
+        cell.onAddTap = { [weak self] in
+            
+            self?.viewModel.addToCart(product: product)
+            
+            self?.updateCartDisplay()
+        }
+            
+        cell.onRemoveTap = { [weak self] in
+       
+            self?.viewModel.removeFromCart(product: product)
+         
+            self?.updateCartDisplay()
+        }
+        
         return cell
     }
 }
@@ -261,5 +289,17 @@ extension ShoppingViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 60
+    }
+}
+
+
+extension ShoppingViewController {
+    func updateCartDisplay() {
+        let totalItemCount = viewModel.getTotalItemCount()
+        let totalPrice = viewModel.getTotalPrice()
+        totalItemsLabel.text = "\(totalItemCount) x"
+        totalPriceLabel.text = String(format: "%.2f", totalPrice) + "$"
+        tableView.reloadData()
+        
     }
 }

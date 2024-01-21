@@ -8,6 +8,7 @@
 import Foundation
 import Alamofire
 
+// MARK: - Delegates
 protocol ProductListViewModelTypeDelegate {
     var input: ProductListViewModelInputDelegate { get }
     var output: ProductListViewModelOutputDelegate? { get set }
@@ -28,6 +29,101 @@ class ShoppingViewModel: ProductListViewModelTypeDelegate {
     var output: ProductListViewModelOutputDelegate?
     
     private var products: [Product] = []
+    private var userCart: [CartItem] = []
+    private var currentUser: User!
+    
+    private var totalItemCount: Int = 0
+    private var totalPrice: Double = 0.0
+    
+    init() {
+        setCurrentUser()
+        getUserCart()
+    }
+    
+    func getUserCart() {
+        userCart = CartManager.shared.getCart(forUser: currentUser.id)
+    }
+    
+    func isCartEmpty() -> Bool {
+            return userCart.isEmpty
+        }
+    
+    func addToCart(product: Product) {
+        if product.stock > 0 {
+            if let index = userCart.firstIndex(where: { $0.product.id == product.id }) {
+                userCart[index].quantity += 1
+            } else {
+                userCart.append(CartItem(product: product, quantity: 1))
+            }
+            adjustStock(ofProductWithId: product.id, by: -1)
+            updateCartAndBalance()
+        } else {
+            output?.showError(text: "პროდუქტი ამოწურულია მარაგში.")
+        }
+    }
+
+    func removeFromCart(product: Product) {
+        if let cartIndex = userCart.firstIndex(where: { $0.product.id == product.id }) {
+            if userCart[cartIndex].quantity > 1 {
+                userCart[cartIndex].quantity -= 1
+                adjustStock(ofProductWithId: product.id, by: 1)
+            } else {
+                userCart.remove(at: cartIndex)
+                adjustStock(ofProductWithId: product.id, by: 1)
+            }
+            updateCartAndBalance()
+        } else {
+            output?.showError(text: "პროდუქტი არ მოიძებნა კალათაში.")
+        }
+    }
+    
+    private func adjustStock(ofProductWithId productId: Int, by amount: Int) {
+        if let index = products.firstIndex(where: { $0.id == productId }) {
+            products[index].stock += amount
+        }
+    }
+    
+    private func updateCartAndBalance() {
+//        let totalCost = userCart.reduce(0) { $0 + $1.product.price * Double($1.quantity) }
+//        if currentUser.balance >= totalCost {
+//            currentUser.balance -= totalCost
+//            UserDefaultsManager.shared.saveUser(currentUser)
+//        } else {
+//            output?.showError(text: "არასაკმარისი ბალანსი.")
+//        }
+        
+        CartManager.shared.saveCart(userCart, forUser: currentUser.id)
+        
+        totalItemCount = userCart.reduce(0) { $0 + $1.quantity }
+        totalPrice = userCart.reduce(0.0) { $0 + ($1.product.price * Double($1.quantity)) }
+        
+        output?.reloadData()
+    }
+    
+    func getQuantity(for product: Product) -> Int {
+            if let cartItem = userCart.first(where: { $0.product.id == product.id }) {
+                return cartItem.quantity
+            } else {
+                return 0
+            }
+        }
+    
+    func getTotalItemCount() -> Int {
+            return totalItemCount
+        }
+
+     func getTotalPrice() -> Double {
+         return totalPrice
+     }
+    
+    private func setCurrentUser() {
+        self.currentUser = UserDefaultsManager.shared.getUser()
+    }
+
+   
+    func getItemsForSecondViewModel() -> [CartItem] {
+            return userCart
+        }
     
     var categorizedProducts: [(category: String, products: [Product])] {
         let groupedProducts = Dictionary(grouping: products, by: { $0.category })
