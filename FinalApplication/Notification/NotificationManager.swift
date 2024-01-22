@@ -33,7 +33,6 @@ class NotificationManager: NSObject {
         }
     }
     
-    // Create and schedule a notification
     func createAndScheduleNotification() {
         let content = UNMutableNotificationContent()
         content.title = "message".localized
@@ -51,12 +50,6 @@ class NotificationManager: NSObject {
             }
         }
         
-        let info: [AnyHashable: Any] = [
-            "name": "ბექა",
-            "surname": "გოგიჩაიშვილი"
-        ]
-        
-        content.userInfo = info
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(5), repeats: false)
         
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
@@ -72,20 +65,13 @@ class NotificationManager: NSObject {
 extension NotificationManager: UNUserNotificationCenterDelegate {
     
     func userNotificationCenter(_ center: UNUserNotificationCenter,
-                                willPresent notification: UNNotification,
-                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        
-        completionHandler([.banner, .sound])
-    }
+                                    willPresent notification: UNNotification,
+                                    withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+            
+            completionHandler([.banner, .sound])
+        }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        
-        let userinfo = response.notification.request.content.userInfo as? [String: Any]
-        
-        if let name = userinfo?["name"] as? String, let surname = userinfo?["surname"] as? String {
-            let fullname = "\(name) \(surname)"
-            delegate?.didReceiveNotification(withText: fullname)
-        }
         
         let defaults = UserDefaults.standard
         var currentBadgeCount = defaults.integer(forKey: UserDefaultsKeys.badgeCount)
