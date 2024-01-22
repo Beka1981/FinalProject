@@ -9,6 +9,8 @@ import UIKit
 
 class PaymentViewController: UIViewController {
 
+    var viewModel = PaymentViewModel()
+    
     lazy var statusImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -40,7 +42,7 @@ class PaymentViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
-        loadStatusImage(for: .failure)
+        loadStatusImage(for: viewModel.status!)
     }
     
     func setupViews() {
@@ -74,8 +76,11 @@ class PaymentViewController: UIViewController {
             switch status {
             case .success:
                 statusImageView.image = UIImage(named: "ok")
+                statusLabel.text = "payment_success".localized.uppercased()
+                AudioPlayerUtility.playAudio(forResource: "success", withExtension: "mp3")
             case .failure:
                 statusImageView.image = UIImage(named: "close")
+                statusLabel.text = "payment_error".localized.uppercased()
             }
         }
     

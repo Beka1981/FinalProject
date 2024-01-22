@@ -16,6 +16,7 @@
 		C71F6CAD2B5DB715001C98DF /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71F6CAC2B5DB715001C98DF /* PaymentViewController.swift */; };
 		C71F6CAF2B5DB730001C98DF /* PaymentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71F6CAE2B5DB730001C98DF /* PaymentViewModel.swift */; };
 		C71F6CB22B5DBCD0001C98DF /* PaymentStatusEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71F6CB12B5DBCD0001C98DF /* PaymentStatusEnum.swift */; };
+		C73AE6FC2B5E54F900850B2B /* success.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C73AE6FB2B5E54F900850B2B /* success.mp3 */; };
 		C7814EDE2B5AB75000FDC0C7 /* ShoppingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7814EDD2B5AB75000FDC0C7 /* ShoppingViewModel.swift */; };
 		C7814EE12B5AE61C00FDC0C7 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = C7814EE02B5AE61C00FDC0C7 /* Alamofire */; };
 		C7814EE42B5AF2FF00FDC0C7 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = C7814EE32B5AF2FF00FDC0C7 /* SDWebImage */; };
@@ -54,6 +55,7 @@
 		C71F6CAC2B5DB715001C98DF /* PaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
 		C71F6CAE2B5DB730001C98DF /* PaymentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewModel.swift; sourceTree = "<group>"; };
 		C71F6CB12B5DBCD0001C98DF /* PaymentStatusEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentStatusEnum.swift; sourceTree = "<group>"; };
+		C73AE6FB2B5E54F900850B2B /* success.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = success.mp3; sourceTree = "<group>"; };
 		C7814EDD2B5AB75000FDC0C7 /* ShoppingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingViewModel.swift; sourceTree = "<group>"; };
 		C7814EE82B5AF7B200FDC0C7 /* CustomRequestInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRequestInterceptor.swift; sourceTree = "<group>"; };
 		C7814EEA2B5AF82A00FDC0C7 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
@@ -211,6 +213,7 @@
 		C79541F52B59AEF000D8215C /* Audio */ = {
 			isa = PBXGroup;
 			children = (
+				C73AE6FB2B5E54F900850B2B /* success.mp3 */,
 				C79541F62B59AF0E00D8215C /* error.mp3 */,
 			);
 			path = Audio;
@@ -438,6 +441,7 @@
 			files = (
 				C79D13F92B57B70400C023BB /* LaunchScreen.storyboard in Resources */,
 				C79541F72B59AF0E00D8215C /* error.mp3 in Resources */,
+				C73AE6FC2B5E54F900850B2B /* success.mp3 in Resources */,
 				C79D13F62B57B70400C023BB /* Assets.xcassets in Resources */,
 				C7DE985E2B587F4000727D48 /* Localizable.xcstrings in Resources */,
 			);

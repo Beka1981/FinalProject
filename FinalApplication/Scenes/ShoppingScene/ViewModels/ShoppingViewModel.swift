@@ -84,14 +84,7 @@ class ShoppingViewModel: ProductListViewModelTypeDelegate {
     }
     
     private func updateCartAndBalance() {
-//        let totalCost = userCart.reduce(0) { $0 + $1.product.price * Double($1.quantity) }
-//        if currentUser.balance >= totalCost {
-//            currentUser.balance -= totalCost
-//            UserDefaultsManager.shared.saveUser(currentUser)
-//        } else {
-//            output?.showError(text: "არასაკმარისი ბალანსი.")
-//        }
-        
+
         CartManager.shared.saveCart(userCart, forUser: currentUser.id)
         
         totalItemCount = userCart.reduce(0) { $0 + $1.quantity }

@@ -183,11 +183,23 @@ class DetailsViewController: UIViewController {
         }
 
     @objc private func didTapCheckoutButton() {
+        let balance = UserDefaultsManager.shared.getUser()!.balance
+        let price = self.viewModel.calculateTotalAmount()
+        let fee = price * 0.10
+        let total = price + fee + 50.0
+        var status: Status?
+        
+        if (balance < total) {
+            status = .failure
+        } else {
+            status = .success
+        }
         let paymentViewController = PaymentViewController()
                
-       
+        paymentViewController.viewModel.status = status
                 self.present(paymentViewController, animated: true, completion: nil)
         }
+    
     
 }
 
