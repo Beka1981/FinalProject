@@ -248,8 +248,8 @@
 		C79D13EB2B57B70200C023BB /* FinalApplication */ = {
 			isa = PBXGroup;
 			children = (
-				C7814EE72B5AF7A400FDC0C7 /* Network */,
 				C7DE98502B585F6800727D48 /* App */,
+				C7814EE72B5AF7A400FDC0C7 /* Network */,
 				C79541FA2B59B8B500D8215C /* Helpers */,
 				C79541F52B59AEF000D8215C /* Audio */,
 				C7DE985A2B587A4100727D48 /* Localizable */,

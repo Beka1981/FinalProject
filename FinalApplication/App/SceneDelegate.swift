@@ -18,8 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let isUserLoggedIn = UserDefaults.standard.bool(forKey: "isUserLoggedIn")
         let initialViewController: UIViewController
         
-        if isUserLoggedIn, let userData = UserDefaults.standard.data(forKey: "currentUser"),
-           let _ = try? JSONDecoder().decode(User.self, from: userData) {
+        if isUserLoggedIn {
             initialViewController = ShoppingViewController()
         } else {
             initialViewController = LoginController()

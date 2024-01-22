@@ -40,13 +40,13 @@ class ShoppingViewModel: ProductListViewModelTypeDelegate {
         getUserCart()
     }
     
-    func getUserCart() {
+    private func getUserCart() {
         userCart = CartManager.shared.getCart(forUser: currentUser.id)
     }
     
     func isCartEmpty() -> Bool {
-            return userCart.isEmpty
-        }
+        return userCart.isEmpty
+    }
     
     func addToCart(product: Product) {
         if product.stock > 0 {
@@ -58,10 +58,10 @@ class ShoppingViewModel: ProductListViewModelTypeDelegate {
             adjustStock(ofProductWithId: product.id, by: -1)
             updateCartAndBalance()
         } else {
-            output?.showError(text: "პროდუქტი ამოწურულია მარაგში.")
+            output?.showError(text: "product _is_out_of_stock".localized)
         }
     }
-
+    
     func removeFromCart(product: Product) {
         if let cartIndex = userCart.firstIndex(where: { $0.product.id == product.id }) {
             if userCart[cartIndex].quantity > 1 {
@@ -73,7 +73,7 @@ class ShoppingViewModel: ProductListViewModelTypeDelegate {
             }
             updateCartAndBalance()
         } else {
-            output?.showError(text: "პროდუქტი არ მოიძებნა კალათაში.")
+            output?.showError(text: "no_product_found_in_cart".localized)
         }
     }
     
@@ -84,7 +84,7 @@ class ShoppingViewModel: ProductListViewModelTypeDelegate {
     }
     
     private func updateCartAndBalance() {
-
+        
         CartManager.shared.saveCart(userCart, forUser: currentUser.id)
         
         totalItemCount = userCart.reduce(0) { $0 + $1.quantity }
@@ -94,29 +94,28 @@ class ShoppingViewModel: ProductListViewModelTypeDelegate {
     }
     
     func getQuantity(for product: Product) -> Int {
-            if let cartItem = userCart.first(where: { $0.product.id == product.id }) {
-                return cartItem.quantity
-            } else {
-                return 0
-            }
+        if let cartItem = userCart.first(where: { $0.product.id == product.id }) {
+            return cartItem.quantity
+        } else {
+            return 0
         }
+    }
     
     func getTotalItemCount() -> Int {
-            return totalItemCount
-        }
-
-     func getTotalPrice() -> Double {
-         return totalPrice
-     }
+        return totalItemCount
+    }
+    
+    func getTotalPrice() -> Double {
+        return totalPrice
+    }
     
     private func setCurrentUser() {
         self.currentUser = UserDefaultsManager.shared.getUser()
     }
-
-   
+    
     func getItemsForSecondViewModel() -> [CartItem] {
-            return userCart
-        }
+        return userCart
+    }
     
     var categorizedProducts: [(category: String, products: [Product])] {
         let groupedProducts = Dictionary(grouping: products, by: { $0.category })

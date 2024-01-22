@@ -8,10 +8,10 @@
 import Foundation
 
 class CartManager {
+   
     static let shared = CartManager()
     
     private init() {}
-    
     
     func getCart(forUser userId: Int) -> [CartItem] {
         if let cartData = UserDefaults.standard.object(forKey: "cart_\(userId)") as? Data,
@@ -21,13 +21,11 @@ class CartManager {
         return []
     }
     
-    
     func saveCart(_ cart: [CartItem], forUser userId: Int) {
         if let encodedData = try? JSONEncoder().encode(cart) {
             UserDefaults.standard.set(encodedData, forKey: "cart_\(userId)")
         }
     }
-    
     
     func addToCart(product: Product, forUser userId: Int) {
         var cart = getCart(forUser: userId)
@@ -38,7 +36,6 @@ class CartManager {
         }
         saveCart(cart, forUser: userId)
     }
-    
     
     func removeFromCart(product: Product, forUser userId: Int) {
         var cart = getCart(forUser: userId)
@@ -52,13 +49,12 @@ class CartManager {
         saveCart(cart, forUser: userId)
     }
     
-    
     func clearCart(forUser userId: Int) {
         UserDefaults.standard.removeObject(forKey: "cart_\(userId)")
     }
     
     func isCartEmpty(forUser userId: Int) -> Bool {
-            let cart = getCart(forUser: userId)
-            return cart.isEmpty
-        }
+        let cart = getCart(forUser: userId)
+        return cart.isEmpty
+    }
 }

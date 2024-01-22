@@ -20,7 +20,6 @@ class NetworkService {
         self.session = Session(interceptor: interceptor)
     }
     
-    
     func getData<T: Codable>(from urlString: String,
                              method: HTTPMethod = .get,
                              completion: @escaping (Result<T, NetworkManagerError>) -> Void) {
@@ -61,7 +60,6 @@ class NetworkService {
                 }
             }
     }
-    
     
 }
 

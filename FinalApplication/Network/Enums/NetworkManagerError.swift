@@ -11,7 +11,7 @@ enum NetworkManagerError: Error, CustomStringConvertible {
     case invalidRequest
     case serverError
     case unknownError(String)
-
+    
     var description: String {
         switch self {
         case .invalidURL:

@@ -9,19 +9,19 @@ import Foundation
 import Alamofire
 
 class CustomRequestInterceptor: RequestInterceptor {
-
+    
     func adapt(_ urlRequest: URLRequest, for session: Session, completion: @escaping (Result<URLRequest, Error>) -> Void) {
         
         logRequest(urlRequest)
         completion(.success(urlRequest))
     }
-
+    
     func retry(_ request: Request, for session: Session, dueTo error: Error, completion: @escaping (RetryResult) -> Void) {
         
         print("Retry request: \(request.request?.url?.absoluteString ?? "") due to error: \(error.localizedDescription)")
         completion(.doNotRetry)
     }
-
+    
     private func logRequest(_ request: URLRequest) {
         if let url = request.url?.absoluteString {
             print("Request URL: \(url)")
@@ -36,7 +36,7 @@ class CustomRequestInterceptor: RequestInterceptor {
             print("Body: \(bodyString)")
         }
     }
-
+    
     func logResponse<T>(_ response: DataResponse<T, AFError>) {
         if let url = response.request?.url?.absoluteString {
             print("Response URL: \(url)")

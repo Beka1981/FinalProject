@@ -8,9 +8,9 @@
 import UIKit
 
 class ShoppingViewController: UIViewController {
- 
+    
     // MARK: - Properties
-    lazy var logoutButton: UIButton = {
+    private lazy var logoutButton: UIButton = {
         let button = UIButton(type: .system)
         if let iconImage = UIImage(named: "logout") {
             button.setImage(iconImage.withRenderingMode(.alwaysOriginal), for: .normal)
@@ -19,88 +19,87 @@ class ShoppingViewController: UIViewController {
         button.contentHorizontalAlignment = .fill
         button.contentVerticalAlignment = .fill
         button.clipsToBounds = true
-        button.addTarget(self, action: #selector(logoutButtonTapped), for: .touchUpInside)
         return button
     }()
     
-    lazy var logoImageView: UIImageView = {
+    private lazy var logoImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "Logo")
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
     
-    lazy var tableView: UITableView = {
+    private lazy var tableView: UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
         table.dataSource = self
         table.delegate = self
         table.backgroundColor = UIColor.clear
         table.separatorStyle = .none
         return table
-        }()
+    }()
     
-    let bottomContainerView: UIView = {
+    private lazy var bottomContainerView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(red: 68/255.0, green: 165/255.0, blue: 255/255.0, alpha: 1.0)
         return view
-        }()
-        
-    let transparentButton: UIButton = {
+    }()
+    
+    private lazy var transparentButton: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = .clear
         return button
     }()
     
-    let cartImageView: UIImageView = {
+    private lazy var cartImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "bag")
         imageView.tintColor = .white
         return imageView
-        }()
+    }()
     
-    let lineImageView: UIImageView = {
+    private lazy var lineImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "Line")
         imageView.tintColor = .white
         return imageView
-        }()
+    }()
     
-    let totalItemsLabel: UILabel = {
+    private lazy var totalItemsLabel: UILabel = {
         let label = UILabel()
         label.text = "0 x"
         label.font = UIFont.boldSystemFont(ofSize: 12)
         label.textColor = .white
         return label
-        }()
+    }()
     
-    let totalPriceLabel: UILabel = {
+    private lazy var totalPriceLabel: UILabel = {
         let label = UILabel()
         label.text = "0 $"
         label.font = UIFont.boldSystemFont(ofSize: 12)
         label.textColor = .white
         return label
-        }()
+    }()
     
-    let actionLabel: UILabel = {
+    private lazy var actionLabel: UILabel = {
         let label = UILabel()
         label.text = "go_to_cart".localized
         label.font = UIFont.boldSystemFont(ofSize: 12)
         label.textColor = .white
         return label
-        }()
+    }()
     
-    let arrowImageView: UIImageView = {
+    private lazy var arrowImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image =  UIImage(named: "arrow-right")
+        imageView.image = UIImage(named: "arrow-right")
         imageView.tintColor = .white
         return imageView
-        }()
+    }()
     
-    private let activityIndicator: UIActivityIndicatorView = {
+    private lazy var activityIndicator: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView(style: .large)
         indicator.hidesWhenStopped = true
         return indicator
-        }()
+    }()
     
     var viewModel = ShoppingViewModel()
     
@@ -116,14 +115,12 @@ class ShoppingViewController: UIViewController {
     private func setupLayout() {
         
         view.backgroundColor = .white
-        
         navigationItem.hidesBackButton = true
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         
         tableView.register(CustomTableViewCell.self, forCellReuseIdentifier: CustomTableViewCell.identifier)
         
         view.addSubview(logoImageView)
-        view.addSubview(logoutButton)
         view.addSubview(tableView)
         view.addSubview(activityIndicator)
         view.addSubview(bottomContainerView)
@@ -133,17 +130,15 @@ class ShoppingViewController: UIViewController {
         bottomContainerView.addSubview(totalPriceLabel)
         bottomContainerView.addSubview(actionLabel)
         bottomContainerView.addSubview(arrowImageView)
+        view.addSubview(logoutButton)
+        view.bringSubviewToFront(logoutButton)
+        logoutButton.layer.zPosition = CGFloat(Float.greatestFiniteMagnitude)
         
         activityIndicator.centerInSuperview()
         activityIndicator.startAnimating()
-       
-        logoutButton.topToSuperview(offset: -40, usingSafeArea: true)
-        logoutButton.rightToSuperview(offset: -20)
-        logoutButton.width(40)
-        logoutButton.height(40)
         
         logoImageView.centerXToSuperview()
-        logoImageView.topToSuperview(offset: -30, usingSafeArea: true)
+        logoImageView.topToSuperview(offset: 10, usingSafeArea: true)
         logoImageView.width(122)
         logoImageView.height(103)
         
@@ -169,47 +164,58 @@ class ShoppingViewController: UIViewController {
         lineImageView.centerYToSuperview(offset: -10)
         lineImageView.width(1)
         lineImageView.height(20)
-                
+        
         totalItemsLabel.leadingToTrailing(of: lineImageView, offset: 12)
         totalItemsLabel.centerYToSuperview(offset: -20)
         
         totalPriceLabel.leadingToTrailing(of: lineImageView, offset: 12)
         totalPriceLabel.topToBottom(of: totalItemsLabel, offset: 5)
-                
+        
         arrowImageView.trailingToSuperview(offset: 16)
         arrowImageView.centerYToSuperview(offset: -10)
         arrowImageView.width(24)
         arrowImageView.height(24)
-                
+        
         actionLabel.trailingToLeading(of: arrowImageView, offset: -12   )
         actionLabel.centerYToSuperview(offset: -10)
         
+        logoutButton.topToSuperview(usingSafeArea: true)
+        logoutButton.rightToSuperview(offset: -20)
+        logoutButton.width(40)
+        logoutButton.height(40)
+        
         transparentButton.addTarget(self, action: #selector(transparentButtonTapped), for: .touchUpInside)
+        
+        logoutButton.addTarget(self, action: #selector(logoutButtonTapped), for: .touchUpInside)
     }
     
     // MARK: - Actions
-    @objc func logoutButtonTapped() {
-        print("logout!!!!!")
+    @objc private func logoutButtonTapped() {
+        
         UserDefaultsManager.shared.deleteUser()
         UserDefaultsManager.shared.setLoginStatus(false)
-       
+        
         if let navigationController = self.navigationController {
-            navigationController.popToRootViewController(animated: true)
-        } else {
-            let loginController = LoginController() 
-            loginController.navigationItem.hidesBackButton = true
-                self.navigationController?.pushViewController(loginController, animated: true)
+            if let viewControllers = self.navigationController?.viewControllers {
+                if let loginController = viewControllers.first(where: { $0 is LoginController }) {
+                    navigationController.popToViewController(loginController, animated: true)
+                } else {
+                    let loginController = LoginController()
+                    loginController.navigationItem.hidesBackButton = true
+                    self.navigationController?.pushViewController(loginController, animated: true)
+                }
+            }
         }
         
     }
     
-    @objc func transparentButtonTapped() {
+    @objc private func transparentButtonTapped() {
         if (!viewModel.isCartEmpty()) {
             let vc = DetailsViewController()
             vc.viewModel.cart = viewModel.getItemsForSecondViewModel()
             self.navigationController?.pushViewController(vc, animated: true)
         } else {
-            let alert = UIAlertController(title: "შეტყობინება", message: "კალათა ცარიელია.", preferredStyle: .alert)
+            let alert = UIAlertController(title: "message".localized, message: "cart_is_empty".localized, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default))
             self.present(alert, animated: true)
         }
@@ -226,7 +232,7 @@ extension ShoppingViewController: ProductListViewModelOutputDelegate {
     }
     
     func showError(text: String) {
-        let alert = UIAlertController(title: "შეცდომა", message: text, preferredStyle: .alert)
+        let alert = UIAlertController(title: "error".localized, message: text, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         self.present(alert, animated: true)
     }
@@ -237,11 +243,11 @@ extension ShoppingViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return viewModel.categorizedProducts.count
     }
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.categorizedProducts[section].products.count
     }
-
+    
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return viewModel.categorizedProducts[section].category
     }
@@ -251,7 +257,7 @@ extension ShoppingViewController: UITableViewDataSource {
             header.textLabel?.textColor = .black
         }
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: CustomTableViewCell.identifier, for: indexPath) as? CustomTableViewCell else {
             fatalError("Unable to dequeue CustomTableViewCell")
@@ -260,7 +266,7 @@ extension ShoppingViewController: UITableViewDataSource {
         cell.configure(with: product)
         
         let quantity = viewModel.getQuantity(for: product)
-            cell.quantity = quantity
+        cell.quantity = quantity
         
         cell.onAddTap = { [weak self] in
             
@@ -268,18 +274,17 @@ extension ShoppingViewController: UITableViewDataSource {
             
             self?.updateCartDisplay()
         }
-            
+        
         cell.onRemoveTap = { [weak self] in
-       
+            
             self?.viewModel.removeFromCart(product: product)
-         
+            
             self?.updateCartDisplay()
         }
         
         return cell
     }
 }
-
 
 extension ShoppingViewController: UITableViewDelegate {
     
@@ -291,7 +296,6 @@ extension ShoppingViewController: UITableViewDelegate {
         return 60
     }
 }
-
 
 extension ShoppingViewController {
     func updateCartDisplay() {

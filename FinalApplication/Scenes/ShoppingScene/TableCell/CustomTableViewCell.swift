@@ -39,7 +39,7 @@ class CustomTableViewCell: UITableViewCell {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 12)
         label.textColor = .black
-        label.numberOfLines = 1 
+        label.numberOfLines = 1
         label.lineBreakMode = .byTruncatingTail
         return label
     }()
@@ -79,10 +79,10 @@ class CustomTableViewCell: UITableViewCell {
     }
     
     var quantity: Int = 0 {
-            didSet {
-                quantityLabel.text = "\(quantity)"
-            }
+        didSet {
+            quantityLabel.text = "\(quantity)"
         }
+    }
     
     var onAddTap: (() -> Void)?
     var onRemoveTap: (() -> Void)?
@@ -102,14 +102,12 @@ class CustomTableViewCell: UITableViewCell {
     // MARK: - Configure view
     private func layoutCell() {
         
-        contentView.addSubview(cardView)
-        cardView.edgesToSuperview(usingSafeArea: true)
-        
-        cardView.edgesToSuperview(insets: .top(10) + .left(10) + .bottom(10) + .right(10))
         contentView.clipsToBounds = false
         selectionStyle = .none
         backgroundColor = .clear
-        
+        contentView.addSubview(cardView)
+        cardView.edgesToSuperview(usingSafeArea: true)
+        cardView.edgesToSuperview(insets: .top(10) + .left(10) + .bottom(10) + .right(10))
         cardView.addSubview(productImageView)
         cardView.addSubview(titleLabel)
         cardView.addSubview(stockLabel)
@@ -155,22 +153,18 @@ class CustomTableViewCell: UITableViewCell {
         stockLabel.text = "stock: \(product.stock)"
         priceLabel.text = "price: \(product.price)"
         
-        
         if let url = URL(string: product.thumbnail) {
             productImageView.sd_setImage(with: url, completed: nil)
         }
     }
     
-    // MARK: - Button clicks
+    // MARK: - Action
     @objc func decreaseButtonTapped() {
-            onRemoveTap?()
-        
-        }
-
+        onRemoveTap?()
+    }
+    
     @objc func increaseButtonTapped() {
         onAddTap?()
-        
-        
     }
     
 }
