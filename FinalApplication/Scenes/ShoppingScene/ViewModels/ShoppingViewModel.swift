@@ -38,21 +38,11 @@ class ShoppingViewModel: ProductListViewModelTypeDelegate {
     init() {
         setCurrentUser()
         getUserCart()
+        getItemCountAndPrice ()
     }
     
     private func getUserCart() {
         userCart = CartManager.shared.getCart(forUser: currentUser.id)
-    }
-    
-    func getTotalprice() -> Double {
-      
-        let totalAmount = userCart.reduce(0.0) { (total, cartItem) in
-            let productPrice = cartItem.product.price
-            let quantity = Double(cartItem.quantity)
-            return total + (productPrice * quantity)
-        }
-        
-        return totalAmount
     }
     
     func isCartEmpty() -> Bool {
@@ -98,10 +88,14 @@ class ShoppingViewModel: ProductListViewModelTypeDelegate {
         
         CartManager.shared.saveCart(userCart, forUser: currentUser.id)
         
-        totalItemCount = userCart.reduce(0) { $0 + $1.quantity }
-        totalPrice = userCart.reduce(0.0) { $0 + ($1.product.price * Double($1.quantity)) }
+        getItemCountAndPrice ()
         
         output?.reloadData()
+    }
+    
+    private func getItemCountAndPrice () {
+        totalItemCount = userCart.reduce(0) { $0 + $1.quantity }
+        totalPrice = userCart.reduce(0.0) { $0 + ($1.product.price * Double($1.quantity)) }
     }
     
     func getQuantity(for product: Product) -> Int {

@@ -109,6 +109,7 @@ class ShoppingViewController: UIViewController {
         setupLayout()
         viewModel.output = self
         viewModel.getProduct()
+        updateCartDisplay()
     }
     
     // MARK: - Setup
