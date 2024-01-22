@@ -16,10 +16,17 @@ protocol ProductDetailViewModelInput {
 }
 
 protocol ProductDetailViewModelOutput {
+    func reloadData(newBalance: Double)
     func showError(text: String)
 }
 
 class DetailsViewModel: NSObject, ProductDetailViewModelType {
+    
+    private let notificationManager: NotificationManager
+    
+    override init() {
+        self.notificationManager = NotificationManager.shared
+    }
     
     var input: ProductDetailViewModelInput { self }
     var output: ProductDetailViewModelOutput?
@@ -46,6 +53,8 @@ class DetailsViewModel: NSObject, ProductDetailViewModelType {
             currentUser.balance -= totalCost
             UserDefaultsManager.shared.saveUser(currentUser)
             CartManager.shared.clearCart(forUser: currentUser.id)
+            notificationManager.createAndScheduleNotification()
+            self.output?.reloadData(newBalance: UserDefaultsManager.shared.getUser()!.balance)
         } else {
             output?.showError(text: "insufficient_balance".localized)
         }

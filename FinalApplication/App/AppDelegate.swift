@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import UserNotifications
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -14,11 +15,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
-        
+       
         Bundle.setLanguage("ka-GE")
         
         UserDefaults.standard.set(["ka-GE"], forKey: "AppleLanguages")
         UserDefaults.standard.synchronize()
+        
+        let notificationManager = NotificationManager.shared
+        notificationManager.requestAuthorization()
         
         return true
     }

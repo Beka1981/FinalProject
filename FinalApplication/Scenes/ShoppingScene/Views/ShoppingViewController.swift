@@ -299,11 +299,13 @@ extension ShoppingViewController: UITableViewDelegate {
 
 extension ShoppingViewController {
     func updateCartDisplay() {
-        let totalItemCount = viewModel.getTotalItemCount()
-        let totalPrice = viewModel.getTotalPrice()
-        totalItemsLabel.text = "\(totalItemCount) x"
-        totalPriceLabel.text = String(format: "%.2f", totalPrice) + "$"
-        tableView.reloadData()
+        DispatchQueue.main.async { [self] in
+            let totalItemCount = viewModel.getTotalItemCount()
+            let totalPrice = viewModel.getTotalPrice()
+            totalItemsLabel.text = "\(totalItemCount) x"
+            totalPriceLabel.text = String(format: "%.2f", totalPrice) + "$"
+            tableView.reloadData()
+        }
         
     }
 }

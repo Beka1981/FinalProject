@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C7196F892B5EC07500C09CA1 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7196F882B5EC07500C09CA1 /* NotificationManager.swift */; };
 		C71F6C9A2B5D2548001C98DF /* CartItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71F6C992B5D2548001C98DF /* CartItem.swift */; };
 		C71F6C9C2B5D2581001C98DF /* CartManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71F6C9B2B5D2581001C98DF /* CartManager.swift */; };
 		C71F6C9E2B5D3820001C98DF /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71F6C9D2B5D3820001C98DF /* UserDefaultsManager.swift */; };
@@ -47,6 +48,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C7196F862B5EBE6A00C09CA1 /* FinalApplication.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FinalApplication.entitlements; sourceTree = "<group>"; };
+		C7196F882B5EC07500C09CA1 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		C71F6C992B5D2548001C98DF /* CartItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartItem.swift; sourceTree = "<group>"; };
 		C71F6C9B2B5D2581001C98DF /* CartManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartManager.swift; sourceTree = "<group>"; };
 		C71F6C9D2B5D3820001C98DF /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
@@ -99,6 +102,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C7196F872B5EC05A00C09CA1 /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				C7196F882B5EC07500C09CA1 /* NotificationManager.swift */,
+			);
+			path = Notification;
+			sourceTree = "<group>";
+		};
 		C71F6C9F2B5D7EF3001C98DF /* DetailsScene */ = {
 			isa = PBXGroup;
 			children = (
@@ -251,9 +262,11 @@
 		C79D13EB2B57B70200C023BB /* FinalApplication */ = {
 			isa = PBXGroup;
 			children = (
+				C7196F862B5EBE6A00C09CA1 /* FinalApplication.entitlements */,
 				C7DE98502B585F6800727D48 /* App */,
 				C7814EE72B5AF7A400FDC0C7 /* Network */,
 				C79541FA2B59B8B500D8215C /* Helpers */,
+				C7196F872B5EC05A00C09CA1 /* Notification */,
 				C79541F52B59AEF000D8215C /* Audio */,
 				C7DE985A2B587A4100727D48 /* Localizable */,
 				C7DE98592B5879F900727D48 /* Resources */,
@@ -484,6 +497,7 @@
 				C71F6C9E2B5D3820001C98DF /* UserDefaultsManager.swift in Sources */,
 				C7ABFC902B5A8C88009274EB /* ShoppingViewController.swift in Sources */,
 				C79D13EF2B57B70200C023BB /* SceneDelegate.swift in Sources */,
+				C7196F892B5EC07500C09CA1 /* NotificationManager.swift in Sources */,
 				C7814EEE2B5B054A00FDC0C7 /* ProductModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -626,6 +640,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = FinalApplication/FinalApplication.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -653,6 +668,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = FinalApplication/FinalApplication.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;

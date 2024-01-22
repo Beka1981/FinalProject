@@ -234,6 +234,10 @@ extension DetailsViewController: UITableViewDelegate {
 }
 
 extension DetailsViewController: ProductDetailViewModelOutput {
+    func reloadData(newBalance: Double) {
+        balanceValueLabel.text = String(format: "%.2f", newBalance) + "$"
+    }
+
     func showError(text: String) {
         let alert = UIAlertController(title: "error".localized, message: text, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
@@ -243,17 +247,17 @@ extension DetailsViewController: ProductDetailViewModelOutput {
 
 extension DetailsViewController {
     func updateCartDisplay() {
-        let totalPrice = self.viewModel.calculateTotalAmount()
-        let fee = totalPrice * 0.10
-        let total = totalPrice + fee + 50.0
-        let balance = UserDefaultsManager.shared.getUser()!.balance
-        balanceValueLabel.text = String(format: "%.2f", balance) + "$"
-        totalPriceValueLabel.text = String(format: "%.2f", totalPrice) + "$"
-        feeValueLabel.text = String(format: "%.2f", fee) + "$"
-        deliveryValueLabel.text = "50.00 $"
-        totalValueLabel.text = String(format: "%.2f", total) + "$"
+        DispatchQueue.main.async { [self] in
+            let totalPrice = self.viewModel.calculateTotalAmount()
+            let fee = totalPrice * 0.10
+            let total = totalPrice + fee + 50.0
+            let balance = UserDefaultsManager.shared.getUser()!.balance
+            balanceValueLabel.text = String(format: "%.2f", balance) + "$"
+            totalPriceValueLabel.text = String(format: "%.2f", totalPrice) + "$"
+            feeValueLabel.text = String(format: "%.2f", fee) + "$"
+            deliveryValueLabel.text = "50.00 $"
+            totalValueLabel.text = String(format: "%.2f", total) + "$"
+        }
         
     }
 }
-
-

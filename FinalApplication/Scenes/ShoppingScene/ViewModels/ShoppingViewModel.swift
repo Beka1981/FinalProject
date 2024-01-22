@@ -44,6 +44,17 @@ class ShoppingViewModel: ProductListViewModelTypeDelegate {
         userCart = CartManager.shared.getCart(forUser: currentUser.id)
     }
     
+    func getTotalprice() -> Double {
+      
+        let totalAmount = userCart.reduce(0.0) { (total, cartItem) in
+            let productPrice = cartItem.product.price
+            let quantity = Double(cartItem.quantity)
+            return total + (productPrice * quantity)
+        }
+        
+        return totalAmount
+    }
+    
     func isCartEmpty() -> Bool {
         return userCart.isEmpty
     }
