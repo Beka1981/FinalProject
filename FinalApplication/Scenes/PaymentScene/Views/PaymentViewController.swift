@@ -73,7 +73,18 @@ class PaymentViewController: UIViewController  {
     
     // MARK: - Action
     @objc private func didTapBackButton() {
-        dismiss(animated: true, completion: nil)
+        guard let navigationController = presentingViewController as? UINavigationController else {
+            print("Presenting view controller is not a navigation controller")
+            return
+        }
+        
+        dismiss(animated: true, completion: {
+            let shoppingViewController = ShoppingViewController()
+            DispatchQueue.main.async {
+                navigationController.pushViewController(shoppingViewController, animated: true)
+            }
+        })
+        
     }
     
 }

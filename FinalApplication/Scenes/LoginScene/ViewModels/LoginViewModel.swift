@@ -23,7 +23,7 @@ class UserViewModel: UserViewModelProtocol {
     // MARK: - Login
     func loginUser(email: String, password: String) {
         guard !email.isEmpty, !password.isEmpty else {
-            delegate?.loginDidFail(withErrorMessage: "all_fields_are_required".localized)
+            delegate?.loginDidFail(withErrorMessage: "all_fields_are_requered".localized)
             return
         }
         
@@ -33,7 +33,7 @@ class UserViewModel: UserViewModelProtocol {
         }
         
         if password.count < 8 {
-            delegate?.loginDidFail(withErrorMessage: "password_must_contain_minimum_8_characters".localized)
+            delegate?.loginDidFail(withErrorMessage: "password_must_contain_minimum_8_symbol".localized)
             return
         }
         
