@@ -7,31 +7,33 @@
 
 import Foundation
 
-protocol PaymentViewModelType {
-    var input: PaymentViewModelInput { get }
-    var output: PaymentViewModelOutput? { get }
+protocol PaymentViewModelDelegate: AnyObject {
+    func paymentDidSucceed()
+    func paymentDidFail()
 }
 
-protocol PaymentViewModelInput {
-}
-
-protocol PaymentViewModelOutput {
-    func reloadData()
-    func showError(text: String)
-}
-
-class PaymentViewModel: NSObject, PaymentViewModelType {
+class PaymentViewModel: NSObject {
     
-    var input: PaymentViewModelInput { self }
-    var output: PaymentViewModelOutput?
+    weak var delegate: PaymentViewModelDelegate?
     
     var status: Status?
     
-}
-
-extension PaymentViewModel: PaymentViewModelInput {
+    func viewIsLoaded() {
+        getData ()
+    }
+    
+    func getData () {
+        switch status {
+        case .success:
+            self.delegate?.paymentDidSucceed()
+        case .failure:
+            self.delegate?.paymentDidFail()
+        default: break
+        }
+    }
     
 }
+
 
 
 

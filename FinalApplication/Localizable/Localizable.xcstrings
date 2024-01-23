@@ -324,6 +324,23 @@
         }
       }
     },
+    "user_not_found" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "User not found"
+          }
+        },
+        "ka-GE" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "მომხმარებელი არ მოიძებნა"
+          }
+        }
+      }
+    },
     "welcome" : {
       "extractionState" : "manual",
       "localizations" : {

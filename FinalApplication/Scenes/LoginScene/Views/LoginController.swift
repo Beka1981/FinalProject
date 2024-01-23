@@ -72,12 +72,13 @@ class LoginController: UIViewController {
         return indicator
     }()
     
-    var viewModel: UserViewModelProtocol = UserViewModel()
+    var viewModel: UserViewModel = UserViewModel()
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLayout()
+        viewModel.delegate = self
     }
     
     // MARK: - Setup
@@ -121,34 +122,33 @@ class LoginController: UIViewController {
     
     // MARK: - Actions
     @objc private func loginButtonTapped() {
-        
         let email = emailTextField.text ?? ""
         let password = passwordTextField.text ?? ""
-        let (loginState, user) = viewModel.loginUser(email: email, password: password)
-        
-        switch loginState {
-        case .success:
-            activityIndicator.startAnimating()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                
-                if let user = user { self.viewModel.saveUserToUserDefaults(user) }
-                
-                self.activityIndicator.stopAnimating()
-                
-                let shoppingViewController = ShoppingViewController()
-                self.navigationController?.pushViewController(shoppingViewController, animated: true)
-            }
-        case .failure(let errorMessage):
-            AudioPlayerUtility.playAudio(forResource: "error", withExtension: "mp3")
-            self.showToast(errorMessage)
-            emailTextField.shake()
-            passwordTextField.shake()
-        }
+        viewModel.loginUser(email: email, password: password)
     }
     
 }
 
-// MARK: - UITextField Extension for Padding
+// MARK: - Extension
+extension LoginController: UserViewModelDelegate {
+    func loginDidSucceed(user: User) {
+        activityIndicator.startAnimating()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.viewModel.saveUserToUserDefaults(user)
+            self.activityIndicator.stopAnimating()
+            let shoppingViewController = ShoppingViewController()
+            self.navigationController?.pushViewController(shoppingViewController, animated: true)
+        }
+    }
+    
+    func loginDidFail(withErrorMessage errorMessage: String) {
+        AudioPlayerUtility.playAudio(forResource: "error", withExtension: "mp3")
+        self.showToast(errorMessage)
+        emailTextField.shake()
+        passwordTextField.shake()
+    }
+}
+
 extension UITextField {
     func setLeftPaddingPoints(_ amount: CGFloat) {
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: amount, height: self.frame.size.height))

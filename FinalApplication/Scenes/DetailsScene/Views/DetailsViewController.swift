@@ -111,7 +111,7 @@ class DetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLayout()
-        viewModel.output = self
+        viewModel.delegate = self
         self.updateCartDisplay()
     }
     
@@ -186,7 +186,8 @@ class DetailsViewController: UIViewController {
     
     // MARK: - Action
     @objc private func didTapCheckoutButton() {
-        let balance = UserDefaultsManager.shared.getUser()!.balance
+        guard let user = UserDefaultsManager.shared.getUser() else { return }
+        let balance = user.balance
         let price = self.viewModel.calculateTotalAmount()
         let fee = price * 0.10
         let total = price + fee + 50.0
@@ -216,8 +217,13 @@ extension DetailsViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: DetailsTableViewCell.identifier, for: indexPath) as? DetailsTableViewCell else {
             fatalError("Unable to dequeue CustomTableViewCell")
         }
-        let product = viewModel.cart![indexPath.row].product
-        let quantity = viewModel.cart![indexPath.row].quantity
+        
+        guard let cartItem = viewModel.cart?[indexPath.row] else {
+            fatalError("CartItem at indexPath is nil")
+        }
+        
+        let product = cartItem.product
+        let quantity = cartItem.quantity
         cell.configure(with: product, with: quantity)
         
         return cell
@@ -233,25 +239,32 @@ extension DetailsViewController: UITableViewDelegate {
     }
 }
 
-extension DetailsViewController: ProductDetailViewModelOutput {
+extension DetailsViewController: ProductDetailViewModelDelegate {
     func reloadData(newBalance: Double) {
-        balanceValueLabel.text = String(format: "%.2f", newBalance) + "$"
+        DispatchQueue.main.async { [weak self] in
+            self?.balanceValueLabel.text = String(format: "%.2f", newBalance) + "$"
+        }
     }
-
+    
     func showError(text: String) {
-        let alert = UIAlertController(title: "error".localized, message: text, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        self.present(alert, animated: true)
+        DispatchQueue.main.async { [weak self] in
+            let alert = UIAlertController(title: "error".localized, message: text, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            self?.present(alert, animated: true)
+        }
     }
 }
 
 extension DetailsViewController {
     func updateCartDisplay() {
-        DispatchQueue.main.async { [self] in
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            
+            guard let user = UserDefaultsManager.shared.getUser() else {return}
+            let balance = user.balance
             let totalPrice = self.viewModel.calculateTotalAmount()
             let fee = totalPrice * 0.10
             let total = totalPrice + fee + 50.0
-            let balance = UserDefaultsManager.shared.getUser()!.balance
             balanceValueLabel.text = String(format: "%.2f", balance) + "$"
             totalPriceValueLabel.text = String(format: "%.2f", totalPrice) + "$"
             feeValueLabel.text = String(format: "%.2f", fee) + "$"

@@ -7,29 +7,20 @@
 
 import Foundation
 
-protocol ProductDetailViewModelType {
-    var input: ProductDetailViewModelInput { get }
-    var output: ProductDetailViewModelOutput? { get }
-}
-
-protocol ProductDetailViewModelInput {
-}
-
-protocol ProductDetailViewModelOutput {
+protocol ProductDetailViewModelDelegate: AnyObject {
     func reloadData(newBalance: Double)
     func showError(text: String)
 }
 
-class DetailsViewModel: NSObject, ProductDetailViewModelType {
+class DetailsViewModel: NSObject {
+    
+    weak var delegate: ProductDetailViewModelDelegate?
     
     private let notificationManager: NotificationManager
     
     override init() {
         self.notificationManager = NotificationManager.shared
     }
-    
-    var input: ProductDetailViewModelInput { self }
-    var output: ProductDetailViewModelOutput?
     
     var cart: [CartItem]?
     
@@ -45,22 +36,27 @@ class DetailsViewModel: NSObject, ProductDetailViewModelType {
         return totalAmount
     }
     
-    func pay () {
-        var currentUser = UserDefaultsManager.shared.getUser()!
+    func pay() {
+        guard var currentUser = UserDefaultsManager.shared.getUser() else {
+            delegate?.showError(text: "user_not_found".localized)
+            return
+        }
+        
         let cart = CartManager.shared.getCart(forUser: currentUser.id)
         let totalCost = cart.reduce(0) { $0 + $1.product.price * Double($1.quantity) }
+        
         if currentUser.balance >= totalCost {
             currentUser.balance -= totalCost
             UserDefaultsManager.shared.saveUser(currentUser)
             CartManager.shared.clearCart(forUser: currentUser.id)
             notificationManager.createAndScheduleNotification()
-            self.output?.reloadData(newBalance: UserDefaultsManager.shared.getUser()!.balance)
+            
+            if let updatedUser = UserDefaultsManager.shared.getUser() {
+                delegate?.reloadData(newBalance: updatedUser.balance)
+            }
         } else {
-            output?.showError(text: "insufficient_balance".localized)
+            delegate?.showError(text: "insufficient_balance".localized)
         }
     }
     
-}
-
-extension DetailsViewModel: ProductDetailViewModelInput {
 }

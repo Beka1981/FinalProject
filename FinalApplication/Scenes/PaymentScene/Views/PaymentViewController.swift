@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PaymentViewController: UIViewController {
+class PaymentViewController: UIViewController  {
     
     // MARK: - Properties
     private lazy var statusImageView: UIImageView = {
@@ -42,7 +42,8 @@ class PaymentViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
-        loadStatusImage(for: viewModel.status!)
+        viewModel.delegate = self
+        viewModel.viewIsLoaded()
     }
     
     // MARK: - Setup
@@ -75,16 +76,22 @@ class PaymentViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    // MARK: - Function
-    private func loadStatusImage(for status: Status) {
-        switch status {
-        case .success:
-            statusImageView.image = UIImage(named: "ok")
-            statusLabel.text = "payment_success".localized.uppercased()
+}
+
+// MARK: - Extension
+extension PaymentViewController: PaymentViewModelDelegate {
+    func paymentDidSucceed() {
+        DispatchQueue.main.async { [weak self] in
+            self?.statusImageView.image = UIImage(named: "ok")
+            self?.statusLabel.text = "payment_success".localized.uppercased()
             AudioPlayerUtility.playAudio(forResource: "success", withExtension: "mp3")
-        case .failure:
-            statusImageView.image = UIImage(named: "close")
-            statusLabel.text = "payment_error".localized.uppercased()
+        }
+    }
+    
+    func paymentDidFail() {
+        DispatchQueue.main.async { [weak self] in
+            self?.statusImageView.image = UIImage(named: "close")
+            self?.statusLabel.text = "payment_error".localized.uppercased()
         }
     }
     
